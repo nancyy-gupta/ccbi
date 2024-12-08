@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        .products {
+          max-width: 1200px;
+          margin: 40px auto;
+          padding: 20px;
+          background-color: #264040;
+          background-size:contain;
+          border: 1px solid #ddd;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 20px;
+          
+        
+        }
+
+          .product {
+          background-color: #fff;
+          background-size: contain;
+          padding: 20px;
+          border: 1px solid #ddd;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      
+        .product img {
+          width: 300px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 10px;
+          margin-right: 100px;
+          align-content: center;
+        }
+      
+        .product h2 {
+          font-size: 18px;
+          margin-bottom: 10px;
+          margin-right: 400px;
+        }
+      
+        .product p {
+          font-size: 14px;
+          color: #666;
+        }
+      
+        .product button {
+          background-color: #4CAF50;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      
+        .product button:hover {
+          background-color: #3e8e41;
+        }
+        
+      </style>   
+</head>
+<body>
+
+<div class="products">
+  <h1 style="color: rgb(247, 249, 250);font-size:60px;">Our Products</h1>
+  <div class="product-grid">
+</div>
+<script>
+  let cartCount = 0;
+  const cartCountSpan = document.querySelector('.cart-count');
+  const products = document.querySelectorAll('.product');
+  const notificationSpan = document.createElement('span');
+  notificationSpan.style.position = 'fixed';
+  notificationSpan.style.top = '50%';
+  notificationSpan.style.left = '50%';
+  notificationSpan.style.transform = 'translate(-50%, -50%)';
+  notificationSpan.style.fontSize = '25px';
+  notificationSpan.style.color = 'green';
+  notificationSpan.style.display = 'none';
+  document.body.appendChild(notificationSpan);
+
+  products.forEach(product => {
+    const buyNowButton = product.querySelector('button');
+    buyNowButton.addEventListener('click', () => {
+      cartCount++;
+      cartCountSpan.textContent = cartCount;
+      notificationSpan.textContent = 'Added to cart!';
+      notificationSpan.style.display = 'block';
+      setTimeout(() => {
+        notificationSpan.style.display = 'none';
+      }, 2000);
+    });
+  });
+</script>
+<div class="cart" style="display: inline-block; margin-right: 20px; font-size: 20px; color: rgb(246, 247, 249); position: absolute; top: 40px; right: 100px;">
+  <span class="cart-icon" style="font-size: 50px;">&#128722;</span>
+  <span class="cart-count" style="font-size: 20px; margin-left: 5px;">0</span>
+</div>
+<div class="product-grid">
+      <div class="product">
+      <img src="C:\Users\nancy\Downloads\soo.jpg" style="height: 300px ;width:350px" alt="Product 1">
+      <h2 style="font-size:xx-large;">&#8377;3200</h2>
+      <p style="font-size: x-large;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">CCBI Kit with Solar Panel</p>
+      <button>Buy Now</button>
+    </div>
+    <div class="product">
+      <img src="C:\Users\nancy\Downloads\int.jpg" style="width: 550px;height:310px;" >
+      <h2 style="font-size:xx-large;">&#8377;4500</h2>
+      <p style="font-size: x-large;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" >CCBI Kit with Solar Panel and IOT Technology</p>
+      <button>Buy Now</button>
+</div>   
+
+<footer>
+  <p style="color: #fff;font-size: large;text-align: left;">&copy; 2024 | Circuits Circle</p>
+</footer>
+</body>
+</html>
