@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register here</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #264040;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container { 
+            width: 400px; 
+            padding: 20px; 
+            border: 1px solid #0c9a6f; 
+            background-color: #fff; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold;
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+        }
+        .form-group button { 
+            padding: 10px 20px; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        .form-group button:hover { 
+            background-color: #218838;
+        }
+        h2 { 
+            color: #333; 
+        }
+        .logo { 
+            display: block; 
+            margin: 0 auto 20px; 
+            max-width: 100px;
+        }
+        .link {
+            display: block;
+            margin-top: 20px;
+            color: #32099b;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .hidden { 
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="C:\Users\nancy\Downloads\pp.jpeg" width="2000px; alt="Skill Swap Logo class="logo">
+        
+        <div id="loginForm">
+            <h2>Circuits Circle Login</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <div class="form-group">
+                <button id="loginBtn">Login</button>
+            </div>
+            <a>Don't have an account?</a>
+            <a class="link" onclick="showRegister()"> Register here</a>
+        </div>
+
+        <div id="registerForm" class="hidden">
+            <br>
+               <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="reg_email" name="email">
+            </div>
+            <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="reg_password" name="password">
+</div>
+<div class="form-group">
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password">
+</div>
+            <div class="form-group">
+                <label for="age">Date of Birth</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+            <div class="form-group">
+                <button id="registerBtn">Register</button>
+            </div>
+            <a>Already have an account?                      </a>
+            <a class="link" onclick="showLogin()">Login here</a>
+        </div>
+    </div>
+    <script>
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        document.getElementById('registerBtn').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const skill1 = document.getElementById('skill1').value;
+            const skill2 = document.getElementById('skill2').value;
+            const skill3 = document.getElementById('skill3').value;
+            const email = document.getElementById('reg_email').value;
+            const password = document.getElementById('reg_password').value;
+
+            fetch('register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, age, skill1, skill2, skill3, email, password })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert('Registration successful!');
+                  } else {
+                      alert('Registration failed: ' + data.message);
+                  }
+              });
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            fetch('login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert('Login successful!');
+                  } else {
+                      alert('Login failed: ' + data.message);
+                  }
+              });
+        });
+    </script>
+</body>
+</html>
